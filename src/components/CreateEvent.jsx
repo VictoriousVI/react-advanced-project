@@ -33,19 +33,6 @@ export const CreateEvent = ({ makeEvent }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
-  //Checkbox onChange funcionality
-  /*
-  const handleChange = (e) => {
-    if (categoryIds.includes(Number(e.target.value))) {
-      setCategoryIds(
-        categoryIds.filter((filter) => filter !== Number(e.target.value))
-      );
-    } else {
-      setCategoryIds(categoryIds.concat(Number(e.target.value)));
-    }
-  };
-  */
-
   //Form submit handle.
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -129,7 +116,7 @@ export const CreateEvent = ({ makeEvent }) => {
 
               <FormControl mb="1rem">
                 <FormLabel>Categories</FormLabel>
-                <CheckboxGroup>
+                <CheckboxGroup onChange={(e) => setCategoryIds(e.target.value)}>
                   <Flex justifyContent="space-around">
                     {categories.map((category) => (
                       <Checkbox
