@@ -11,6 +11,7 @@ import {
   LinkOverlay,
 } from "@chakra-ui/react";
 import { TagList } from "./TagList";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 
 export const EventsList = ({ events }) => {
   return (
@@ -26,17 +27,24 @@ export const EventsList = ({ events }) => {
             </AspectRatio>
             <CardBody p="1rem">
               <Flex direction="column" gap="1rem">
-                <Flex justify="space-between">
-                  <Text fontSize={["md", "sm"]}>
+                <Flex
+                  justify="space-between"
+                  alignItems="center"
+                  bg="gray.200"
+                  p="0.5rem"
+                  borderRadius="0.5rem"
+                >
+                  <Text fontSize={["sm", "xs"]}>
                     {event.startTime.slice(0, 10)} <br />
                     {event.startTime.slice(11, 16)}
                   </Text>
-                  <Text fontSize={["md", "sm"]} align="right">
+                  <ArrowForwardIcon boxSize={4} />
+                  <Text fontSize={["sm", "xs"]} align="right">
                     {event.endTime.slice(0, 10)} <br />{" "}
                     {event.endTime.slice(11, 16)}
                   </Text>
                 </Flex>
-                <Heading size={["xl", "lg", "md"]} noOfLines={1}>
+                <Heading size={["lg", "lg", "md"]} noOfLines={1}>
                   <LinkOverlay as={ReactRouterLink} to={`event/${event.id}`}>
                     {event.title}
                   </LinkOverlay>

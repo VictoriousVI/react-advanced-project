@@ -16,7 +16,7 @@ export const Header = () => {
       boxShadow="sm"
     >
       <LinkBox>
-        <Heading>
+        <Heading size={{ base: "xl" }}>
           <LinkOverlay as={Link} to="/">
             events4u
           </LinkOverlay>

@@ -18,6 +18,7 @@ export const EventsPage = () => {
   const [searchField, setSearchField] = useState("");
   const [filterArray, setFilterArray] = useState([]);
 
+  //Filter buttons functionality.
   const clickFn = (categoryId) => {
     if (filterArray.includes(categoryId)) {
       setFilterArray(filterArray.filter((filter) => filter !== categoryId));
@@ -28,6 +29,7 @@ export const EventsPage = () => {
 
   const handleChange = (event) => setSearchField(event.target.value);
 
+  //Filter based on categories.
   const filteredEvents = eventList.filter((event) => {
     if (filterArray.length === 0) {
       return true;
@@ -35,6 +37,7 @@ export const EventsPage = () => {
     return filterArray.some((filter) => event.categoryIds.includes(filter));
   });
 
+  //Filter based on search.
   const matchedEvents = filteredEvents.filter((event) => {
     return event.title.toLowerCase().includes(searchField.toLowerCase());
   });
@@ -45,6 +48,11 @@ export const EventsPage = () => {
       body: JSON.stringify(event),
       headers: { "Content-Type": "application/json;charset=utf-8" },
     });
+
+    if (!response.ok) {
+      throw new Error("failed to create the event");
+    }
+
     event.id = (await response.json()).id;
     setEventList(eventList.concat(event));
   };

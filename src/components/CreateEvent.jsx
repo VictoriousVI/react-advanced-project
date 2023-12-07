@@ -15,6 +15,7 @@ import {
   Input,
   Select,
   CheckboxGroup,
+  Textarea,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 import { CategoriesUsersContext } from "./CategoriesUsersContext";
@@ -33,7 +34,10 @@ export const CreateEvent = ({ makeEvent }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
-  //Form submit handle.
+  const handleCheckboxChange = (selectedValues) => {
+    setCategoryIds(selectedValues.map(Number));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -48,6 +52,7 @@ export const CreateEvent = ({ makeEvent }) => {
       endTime,
     });
 
+    // Reset form fields.
     setCreatedBy("");
     setTitle("");
     setDescription("");
@@ -56,6 +61,9 @@ export const CreateEvent = ({ makeEvent }) => {
     setLocation("");
     setStartTime("");
     setEndTime("");
+
+    // Close modal.
+    onClose();
   };
 
   return (
@@ -66,7 +74,8 @@ export const CreateEvent = ({ makeEvent }) => {
         colorScheme="green"
         position="fixed"
         bottom="1rem"
-        right="1rem"
+        right="2rem"
+        size={["xs", "sm", "md"]}
       >
         Create Event
       </Button>
@@ -106,7 +115,7 @@ export const CreateEvent = ({ makeEvent }) => {
 
               <FormControl isRequired mb="1rem">
                 <FormLabel>Description</FormLabel>
-                <Input onChange={(e) => setDescription(e.target.value)} />
+                <Textarea onChange={(e) => setDescription(e.target.value)} />
               </FormControl>
 
               <FormControl isRequired mb="1rem">
@@ -116,7 +125,7 @@ export const CreateEvent = ({ makeEvent }) => {
 
               <FormControl mb="1rem">
                 <FormLabel>Categories</FormLabel>
-                <CheckboxGroup onChange={(e) => setCategoryIds(e.target.value)}>
+                <CheckboxGroup onChange={handleCheckboxChange}>
                   <Flex justifyContent="space-around">
                     {categories.map((category) => (
                       <Checkbox
@@ -137,12 +146,18 @@ export const CreateEvent = ({ makeEvent }) => {
 
               <FormControl isRequired mb="1rem">
                 <FormLabel>Start time</FormLabel>
-                <Input onChange={(e) => setStartTime(e.target.value)} />
+                <Input
+                  type="datetime-local"
+                  onChange={(e) => setStartTime(e.target.value)}
+                />
               </FormControl>
 
               <FormControl isRequired mb="1rem">
                 <FormLabel>End time</FormLabel>
-                <Input onChange={(e) => setEndTime(e.target.value)} />
+                <Input
+                  type="datetime-local"
+                  onChange={(e) => setEndTime(e.target.value)}
+                />
               </FormControl>
 
               <Button mb="1rem" type="submit">

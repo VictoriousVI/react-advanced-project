@@ -8,7 +8,7 @@ import {
   Tag,
   useDisclosure,
 } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from "@chakra-ui/icons";
 import { useContext } from "react";
 import { CategoriesUsersContext } from "./CategoriesUsersContext";
 
@@ -25,7 +25,12 @@ export const EventSearch = ({ changeFn, clickFn, filterArray }) => {
         <Input focusBorderColor="gray.400" onChange={changeFn} />
       </InputGroup>
 
-      <Button mt="1rem" bg="gray.200" onClick={onToggle}>
+      <Button
+        rightIcon={isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        mt="1rem"
+        bg="gray.200"
+        onClick={onToggle}
+      >
         Filter by categories
       </Button>
       <Collapse in={isOpen} animateOpacity>
