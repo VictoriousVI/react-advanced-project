@@ -34,13 +34,16 @@ export const CreateEvent = ({ makeEvent }) => {
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
 
+  // since chakraUI checkboxes dont take Number values I had to assign them strings. This converts them back to numbers.
   const handleCheckboxChange = (selectedValues) => {
     setCategoryIds(selectedValues.map(Number));
   };
 
+  //handle form submit
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    //makeEvent function from EventsPage sends form data to server and updates the eventslist
     makeEvent({
       createdBy,
       title,
@@ -75,7 +78,6 @@ export const CreateEvent = ({ makeEvent }) => {
         position="fixed"
         bottom="1rem"
         right="2rem"
-        size={["xs", "sm", "md"]}
       >
         Create Event
       </Button>

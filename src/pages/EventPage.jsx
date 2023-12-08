@@ -29,20 +29,23 @@ export const EventPage = () => {
 
   const toast = useToast();
 
+  //find username belonging to the userid
   const creator = users.find((user) => {
     return user.id === currentEvent.createdBy;
   });
 
+  //update request
   const updateEvent = async (updatedEventData) => {
     const response = await fetch(
       `http://localhost:3000/events/${currentEvent.id}`,
       {
-        method: "PUT",
+        method: "PATCH",
         body: JSON.stringify(updatedEventData),
         headers: { "Content-Type": "application/json;charset=utf-8" },
       }
     );
 
+    //error handling with toast message
     if (!response.ok) {
       toast({
         title: "Update failed.",
@@ -54,6 +57,7 @@ export const EventPage = () => {
       throw new Error("failed to update the event");
     }
 
+    //toast when successful
     toast({
       title: "Update successful.",
       description: "Event was successfully updated.",
@@ -64,18 +68,22 @@ export const EventPage = () => {
 
     const updatedEvent = await response.json();
 
+    //update the current event on the eventpage
     setCurrentEvent(updatedEvent);
   };
 
+  //delete request
   const removeEvent = async () => {
     const response = await fetch(
       `http://localhost:3000/events/${currentEvent.id}`,
       { method: "DELETE" }
     );
 
+    //error handling
     if (!response.ok) {
       throw new Error("failed to delete the event");
     }
+    //navigate back to eventslist page
     navigate("/");
   };
 

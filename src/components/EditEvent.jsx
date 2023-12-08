@@ -33,17 +33,17 @@ export const EditEvent = ({ event, updateEvent }) => {
   const [startTime, setStartTime] = useState(event.startTime.slice(0, 16));
   const [endTime, setEndTime] = useState(event.endTime.slice(0, 16));
 
-  const id = event.id;
-
+  // since chakraUI checkboxes dont take Number values I had to assign them strings. This converts them back to numbers.
   const handleCheckboxChange = (selectedValues) => {
     setCategoryIds(selectedValues.map(Number));
   };
 
+  //handle form submit
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    //updateEvent function from EventPage sends PATCH request to server, shows message on success and updates the page
     updateEvent({
-      id,
       createdBy,
       title,
       description,
@@ -54,6 +54,7 @@ export const EditEvent = ({ event, updateEvent }) => {
       endTime,
     });
 
+    //close modal
     onClose();
   };
 

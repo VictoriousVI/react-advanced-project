@@ -27,6 +27,7 @@ export const EventsPage = () => {
     }
   };
 
+  //Keeping track of searchfield
   const handleChange = (event) => setSearchField(event.target.value);
 
   //Filter based on categories.

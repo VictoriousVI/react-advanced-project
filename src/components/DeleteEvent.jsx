@@ -16,6 +16,7 @@ export const DeleteEvent = ({ removeEvent }) => {
 
   const cancelRef = React.useRef();
 
+  // handle for delete buttin within the alert
   const handleClick = () => {
     removeEvent();
     onClose();
@@ -30,7 +31,7 @@ export const DeleteEvent = ({ removeEvent }) => {
         colorScheme="red"
         alignSelf="flex-end"
       >
-        Delete event
+        Delete Event
       </Button>
 
       <AlertDialog
